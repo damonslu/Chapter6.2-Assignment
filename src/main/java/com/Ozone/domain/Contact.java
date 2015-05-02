@@ -8,7 +8,7 @@ import java.io.Serializable;
 //import javax.persistence.Basic;
 //import javax.persistence.Column;
 import javax.persistence.Embeddable;
-//import javax.persistence.Id;
+import javax.persistence.Id;
 //import javax.persistence.Table;
 //import javax.validation.constraints.NotNull;
 //mport javax.validation.constraints.Size;
@@ -22,29 +22,21 @@ import javax.persistence.Embeddable;
 //@XmlRootElement
 @Embeddable
 public class Contact implements Serializable {
-    //private static final long serialVersionUID = 1L;
-    //@Id
-    //@Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 10)
-    //@Column(name = "PHONENUMBER")
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String phonenumber;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    /*@Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "EMAIL")*/
+    
     private String email;
 
     private Contact(Builder builder) {
        phonenumber = builder.phonenumber;
         email = builder.email;
     }
-    public contact(){
+    public Contact(){
     }
-    public Contact build(){
-        return new Contact(this);
-    }
+
     public static class Builder{
     private String phonenumber;
     private String email;
@@ -59,7 +51,10 @@ public class Contact implements Serializable {
         this.email = email;
         return this;
     }
-
+     public Contact build(){
+        return new Contact(this);
+    }
+    }
     public String getPhonenumber() {
         return phonenumber;
     }
@@ -93,4 +88,4 @@ public class Contact implements Serializable {
         return "com.Ozone.Contact[ phonenumber=" + phonenumber + " ]";
     }
     
-}
+    }

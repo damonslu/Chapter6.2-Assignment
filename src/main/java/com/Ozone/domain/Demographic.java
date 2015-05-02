@@ -2,90 +2,88 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.orderApp.entity;
+package com.ozone.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+
 
 //import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Lucrecia
  */
-@Table(name="DEMOGRAPHIC")
-@XmlRootElement
 @Embeddable
 public class Demographic implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "GENDER")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String gender;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "RACE")
     private String race;
-    @Basic(optional=false)
-	@NotNull
-	@Column(name="DOB")
     private Date dob;
 
-    public Demographic() {
+    private Demographic(Builder builder){
+        id = builder.id;
+        gender = builder.gender;
+        race = builder.race;
+        dob = builder.dob;
     }
-
-    public Demographic(String gender) {
-        this.gender = gender;
+    public Demographic(){
+        
     }
-
-    public Demographic(String gender, String race, Date dob) {
-        this.gender = gender;
-        this.race = race;
-        this.dob = dob;
+    public static class Builder{
+        
+    private Long id;
+    private String gender;
+    private String race;
+    private Date dob;
+    
+    public Builder id(Long value){
+        this.id = value;
+        return this;
     }
-
+       public Builder setGender(String value){
+        this.gender = value;
+        return this; 
+    }
+       public Builder setRace(String value){
+        this.race = value;
+        return this;
+       }
+       public Builder setDob(Date value){
+        this.dob = value;
+        return this;
+       }
+       public Demographic build(){
+           return new Demographic(this);
+       }
+    
     public String getGender() {
         return gender;
     }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    }
+    public Long getId(){
+        return id;
     }
 
     public String getRace() {
         return race;
     }
 
-    public void setRace(String race) {
-        this.race = race;
-    }
-
-    public java.util.Date getDob() {
+    public Date getDob() {
         return dob;
     }
-
-    public void setDob(java.util.Date dob) {
-        this.dob = dob;
-    }
-
-    @Override
+    
+      @Override
     public int hashCode() {
         int hash = 0;
-        hash += (gender != null ? gender.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -96,7 +94,7 @@ public class Demographic implements Serializable {
             return false;
         }
         Demographic other = (Demographic) object;
-        if ((this.gender == null && other.gender != null) || (this.gender != null && !this.gender.equals(other.gender))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -104,7 +102,7 @@ public class Demographic implements Serializable {
 
     @Override
     public String toString() {
-        return "com.orderApp.entity.Demographic[ gender=" + gender + " ]";
+        return "com.ozone.domain.Demographic[ gender=" + id + " ]";
     }
     
 }
