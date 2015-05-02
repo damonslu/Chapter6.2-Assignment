@@ -2,37 +2,52 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.orderApp.entity;
+package com.ozone.domain;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Lucrecia
  */
-@Table(name="ORDERDETAILS")
-@XmlRootElement
+
 @Entity
 public class Orderdetails implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ORDERID")
-    private Integer orderid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private Orderdetails(Builder builder){
+        id = builder.id;
+    }
+    public Orderdetails(){
+        
+    }
+    public static class Builder{
+        private Long id;
+        
+        public Builder setId(Long id){
+            this.id = id;
+            return this;
+        }
+        public Orderdetails build(){
+            return new Orderdetails(this);
+        }
+    }
+    public Long getId(){
+        return id;
+    }
+    //private Integer orderid;
     private Collection<Orderitem> orderitems;
     //private Collection<Invoice> invoice; 
     @ManyToOne
@@ -55,24 +70,8 @@ public class Orderdetails implements Serializable {
         public void setInvoice(Invoice inv){
             this.inv = inv;
         }
-     /*public Orderdetails() {
-        
-        invoice = new HashSet();   
-     }*/
     
-
-    public Orderdetails(Integer orderid) {
-        this.orderid = orderid;
-    }
-
-    public Integer getOrderid() {
-        return orderid;
-    }
-
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
-    }
-    @OneToMany(mappedBy = "orderdetails")
+        @OneToMany(mappedBy = "orderdetails")
     public Collection<Orderitem> getOrderitem(){
         
         return orderitems;
@@ -82,11 +81,10 @@ public class Orderdetails implements Serializable {
         this.orderitems = orderitems;
     }
     
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (orderid != null ? orderid.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +95,7 @@ public class Orderdetails implements Serializable {
             return false;
         }
         Orderdetails other = (Orderdetails) object;
-        if ((this.orderid == null && other.orderid != null) || (this.orderid != null && !this.orderid.equals(other.orderid))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.oid))) {
             return false;
         }
         return true;
@@ -105,7 +103,7 @@ public class Orderdetails implements Serializable {
 
     @Override
     public String toString() {
-        return "com.orderApp.entity.Orderdetails[ orderid=" + orderid + " ]";
+        return "com.ozone.domain.Orderdetails[ oid=" + id + " ]";
     }
     
 }

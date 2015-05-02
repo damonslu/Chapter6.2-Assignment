@@ -2,38 +2,59 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.orderApp.entity;
+package com.ozone.domain;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persitence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Lucrecia
  */
-@Table(name="ORDERITEM")
-@XmlRootElement
-@javax.persistence.Entity
+@Entity
 public class Orderitem implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "ITEMNAME")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String itemname;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ITEMQUANTITY")
-    private int itemquantity;
-    @ManyToOne
+    private Integer itemquantity;
+    
+    private Orderitem(Builder builder){
+    
+        id = builder.id;
+        itemname = builder.itemname;
+        itemquantity = builder.itemquantity;
+    } 
+        public Orderitem(){
+            
+        }
+    public static class Builder{
+    private Long id;
+    private String itemname;
+    private Integer itemquantity;
+    
+    public Builder setId(Long id){
+        this.id = id;
+        return this;
+    }
+    public Builder setName(String itemname){
+        this.itemname = itemname;
+        return this;
+    }
+    public Builder setQauntity(Integer itemquantity){
+        this.itemquantity = itemquantity;
+        return this;
+    }
+      public Orderitem build(){
+          return new Orderitem(this);
+      }
+    }   
+        @ManyToOne
     private Orderdetails orderdetails;
     public Orderdetails getOrderdetails(){
         return orderdetails;
@@ -44,38 +65,21 @@ public class Orderitem implements Serializable {
         return product;
     }
 
-    public Orderitem() {
-    }
-
-    public Orderitem(String itemname) {
-        this.itemname = itemname;
-    }
-
-    public Orderitem(String itemname, int itemquantity) {
-        this.itemname = itemname;
-        this.itemquantity = itemquantity;
-    }
+     public Long getId(){
+         return id;
+     } 
 
     public String getItemname() {
         return itemname;
     }
-
-    public void setItemname(String itemname) {
-        this.itemname = itemname;
-    }
-
     public int getItemquantity() {
         return itemquantity;
-    }
-
-    public void setItemquantity(int itemquantity) {
-        this.itemquantity = itemquantity;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (itemname != null ? itemname.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -86,7 +90,7 @@ public class Orderitem implements Serializable {
             return false;
         }
         Orderitem other = (Orderitem) object;
-        if ((this.itemname == null && other.itemname != null) || (this.itemname != null && !this.itemname.equals(other.itemname))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -94,7 +98,7 @@ public class Orderitem implements Serializable {
 
     @Override
     public String toString() {
-        return "com.orderApp.entity.Orderitem[ itemname=" + itemname + " ]";
+        return "com.ozone.domain.Orderitem[ id=" + id + " ]";
     }
     
 }
