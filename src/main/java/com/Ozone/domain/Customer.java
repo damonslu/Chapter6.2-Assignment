@@ -54,7 +54,7 @@ public class Customer implements Serializable {
     }
 
         @OneToMany(mappedBy = "customer")
-    public Collection<Orderdetails>getOrderdetails(){
+    public Collection<Orderdetails> getOrderdetails(){
         return orderdetails;
     }
     public void setOrderdetails(Collection<Orderdetails> orderdetails){

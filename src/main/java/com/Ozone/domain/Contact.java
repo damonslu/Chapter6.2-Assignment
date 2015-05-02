@@ -2,11 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ozone.domain;
+package com.Ozone.domain;
 
+//import com.Ozone.domain.Customer;
 import java.io.Serializable;
-//import javax.persistence.Basic;
-//import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,20 +28,26 @@ public class Contact implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String phonenumber;
-    
-    private String email;
+        private String email;
 
     private Contact(Builder builder) {
-       phonenumber = builder.phonenumber;
+       id = builder.id;
+        phonenumber = builder.phonenumber;
         email = builder.email;
     }
     public Contact(){
     }
 
     public static class Builder{
-    private String phonenumber;
+    private Long id;
+        private String phonenumber;
     private String email;
     
+    public Builder setId(Long id){
+        this.id = id;
+        return this;
+               
+    }
     public  Builder setPhoneNumber(String phonenumber) {
         this.phonenumber = phonenumber;
         return this;
@@ -57,6 +62,10 @@ public class Contact implements Serializable {
         return new Contact(this);
     }
     }
+    public Long getId(){
+        
+        return id;
+    }
     public String getPhonenumber() {
         return phonenumber;
     }
@@ -68,7 +77,7 @@ public class Contact implements Serializable {
         @Override
     public int hashCode() {
         int hash = 0;
-        hash += (phonenumber != null ? phonenumber.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -79,7 +88,7 @@ public class Contact implements Serializable {
             return false;
         }
         Contact other = (Contact) object;
-        if ((this.phonenumber == null && other.phonenumber != null) || (this.phonenumber != null && !this.phonenumber.equals(other.phonenumber))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -87,7 +96,7 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "com.Ozone.Contact[ phonenumber=" + phonenumber + " ]";
+        return "com.Ozone.Contact[ id=" + id + " ]";
     }
     
     }

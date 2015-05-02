@@ -4,6 +4,7 @@
  */
 package com.ozone.domain;
 
+import com.Ozone.domain.Invoice;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
