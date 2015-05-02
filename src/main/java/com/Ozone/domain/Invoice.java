@@ -27,8 +27,7 @@ public class Invoice implements Serializable {
     private Invoice (Builder builder){
         id = builder.id;
     }
-    private Collection<Orderdetails> orders;
-
+    
     public Invoice() {
         
         orders = new HashSet();
@@ -49,6 +48,7 @@ public class Invoice implements Serializable {
     }
        
 @OneToOne (mappedBy "invoice")
+private Collection<Orderdetails> orders;
 public Collection<Orderdetails> getOrderdetails(){
     return orders;
 }
