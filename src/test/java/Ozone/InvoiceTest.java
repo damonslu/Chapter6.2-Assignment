@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+package Ozone;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -13,9 +14,9 @@ import org.testng.annotations.BeforeMethod;
  *
  * @author Lucrecia
  */
-public class CustomerTest {
+public class InvoiceTest {
     
-    public CustomerTest() {
+    public InvoiceTest() {
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

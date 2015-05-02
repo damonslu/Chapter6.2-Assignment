@@ -1,3 +1,5 @@
+package Ozone;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -13,9 +15,9 @@ import org.testng.annotations.BeforeMethod;
  *
  * @author Lucrecia
  */
-public class InvoiceTest {
+public class CustomerTest {
     
-    public InvoiceTest() {
+    public CustomerTest() {
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

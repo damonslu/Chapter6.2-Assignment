@@ -31,8 +31,10 @@ public class Orderdetails implements Serializable {
     private Orderdetails(Builder builder){
         id = builder.id;
     }
-    public Orderdetails(){
+    public Orderdetails() {
         
+        orderitems = new HashSet();
+        //invoice = new HashSet();
     }
     public static class Builder{
         private Long id;
@@ -57,11 +59,7 @@ public class Orderdetails implements Serializable {
         
         return customer;
     }
-        public Orderdetails() {
         
-        orderitems = new HashSet();
-        //invoice = new HashSet();
-    }
         @OneToOne(cascade=CascadeType.PERSIST)
     private Invoice inv;
         public Invoice getInvoice(){
@@ -96,7 +94,7 @@ public class Orderdetails implements Serializable {
             return false;
         }
         Orderdetails other = (Orderdetails) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.oid))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
