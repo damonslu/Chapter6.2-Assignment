@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.orderApp.entity;
+package com.ozone.domain;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -21,69 +21,77 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Lucrecia
  */
-@Table(name="CUSTOMERADDRESS")
-@XmlRootElement
+//@Table(name="CUSTOMERADDRESS")
+//@XmlRootElement
 @Embeddable
 public class Customeraddress implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GedneratedValue(strategy = GenerationType.AUTO)
+    /*@Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "STREETADDRESS")
+    @Column(name = "STREETADDRESS")*/
+    private Long id;
     private String streetaddress;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 40)
-    @Column(name = "CITY")
     private String city;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "REGION")
     private String region;
 
-    public Customeraddress() {
+    private Customeraddress(Builder builder){
+        id = builder.id;
+        streetaddress = builder.streetaddress;
+        city = builder.city;
+        region = builder.region;
     }
-
-    public Customeraddress(String streetaddress) {
-        this.streetaddress = streetaddress;
+    public static class Builder{
+        
+    private Long id;
+    private String streetaddress;
+    private String city;
+    private String region;
+    
+    public Builder id(Long value){
+        this.id = value;
+        return this;
     }
-
-    public Customeraddress(String streetaddress, String city, String region) {
-        this.streetaddress = streetaddress;
-        this.city = city;
-        this.region = region;
+       public Builder setStreetaddress(String value){
+        this.streetaddress = value;
+        return this; 
     }
-
+       public Builder setCity(String value){
+        this.city = value;
+        return this;
+       }
+       public Builder setRegion(String value){
+        this.region = value;
+        return this;
+       }
+       public Customeraddress build(){
+           return new Customeraddress(this);
+       }
+    
     public String getStreetaddress() {
         return streetaddress;
     }
-
-    public void setStreetaddress(String streetaddress) {
-        this.streetaddress = streetaddress;
+    }
+    public Long getId(){
+        return id;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
+    
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (streetaddress != null ? streetaddress.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -94,7 +102,7 @@ public class Customeraddress implements Serializable {
             return false;
         }
         Customeraddress other = (Customeraddress) object;
-        if ((this.streetaddress == null && other.streetaddress != null) || (this.streetaddress != null && !this.streetaddress.equals(other.streetaddress))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -102,7 +110,7 @@ public class Customeraddress implements Serializable {
 
     @Override
     public String toString() {
-        return "com.orderApp.entity.Customeraddress[ streetaddress=" + streetaddress + " ]";
+        return "com.ozone.domain.Customeraddress[ id=" + id + " ]";
     }
     
 }
