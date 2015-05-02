@@ -47,7 +47,7 @@ public class Invoice implements Serializable {
         return id;
     }
        
-@OneToOne (mappedBy "invoice")
+@OneToOne //(mappedBy "invoice")
 private Collection<Orderdetails> orders;
 public Collection<Orderdetails> getOrderdetails(){
     return orders;

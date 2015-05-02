@@ -6,9 +6,9 @@ package com.Ozone.service.Impl;
 
 import com.Ozone.domain.Product;
 import com.Ozone.repository.ProductRepository;
-import com.Ozone.service.ProductCrudService;
+import com.Ozone.service.Service;
 import java.util.*;
-import org.springframwor.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,11 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductCrudServiceImpl implementation ProductCrudService{
+    
 
     @Autowired
     private ProductRepository productRepository;
     @Override
-    public Product find(Long id){
+      public Product find(Long id){
         
         return productRepository.findOne(id);
     }

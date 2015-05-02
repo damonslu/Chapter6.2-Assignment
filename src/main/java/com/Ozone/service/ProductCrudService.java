@@ -5,7 +5,6 @@
 package com.Ozone.service;
 
 import com.Ozone.domain.Product;
-//import com.Ozone.service.service;
 /**
  *
  * @author Lucrecia

@@ -37,7 +37,7 @@ public class OrderdetailsRepositoryTest {
         repo = ctx.getBean(OrderdetailsRepository.class);
         Orderdetails orderdetails = new Orderdetails.Builder("lucrecia@cput.ac.za")
                orderdetails.setId(3);
-               rep.save(orderdetails);
+               repo.save(orderdetails);
     }
     @BeforeClass
     public static void setUpClass() throws Exception {
