@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.orderApp.entity;
+package com.Ozone.domain;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,45 +12,48 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Embedded;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+//import javax.persistence.NamedQueries;
+//import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.persistence.Table;
+//import javax.validation.constraints.NotNull;
+//import javax.xml.bind.annotation.XmlRootElement;*/
 
 /**
  *
  * @author Lucrecia
  */
-@Table(name="CUSTOMER")
-@XmlRootElement
+
 @Entity
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CUSTOMERID")
-    private Integer customerid;
+    private Long id;  
+    private Customer(Builder builder){
+        id = builder.id;
+    }
     private Collection<Orderdetails> orderdetails;
 
     public Customer() {
         orderdetails = new HashSet();
     }
-
-    public Customer(Integer customerid) {
-        this.customerid = customerid;
+    public static class Builder{
+        
+        private Long id;
+        public Builder setId(Long id){
+            this.id = id;
+            return this;
+        }
+        public Customer build(){
+            return new Customer(this);
+        }
     }
 
-    public Integer getCustomerid() {
-        return customerid;
+        public Long getId() {
+        return id;
     }
 
-    public void setCustomerid(Integer customerid) {
-        this.customerid = customerid;
-    }
-    @OneToMany(mappedBy = "customer")
+        @OneToMany(mappedBy = "customer")
     public Collection<Orderdetails>getOrderdetails(){
         return orderdetails;
     }
@@ -58,9 +61,9 @@ public class Customer implements Serializable {
         this.orderdetails = orderdetails;
     }
     @Embedded
-    private Customeraddress address;
-    public Customeraddress getAddress(){
-        return address;
+    private Customeraddress id;
+    public Customeraddress getId(){
+        return id;
     }
     public void setAddress(Customeraddress address){
         this.address = address;
@@ -83,7 +86,7 @@ public class Customer implements Serializable {
     }
     @Embedded
     private Name name;
-    public Name geName(){
+    public Name getName(){
         return name;
     }
     public void setName(Name name){
@@ -93,7 +96,7 @@ public class Customer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (customerid != null ? customerid.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +107,7 @@ public class Customer implements Serializable {
             return false;
         }
         Customer other = (Customer) object;
-        if ((this.customerid == null && other.customerid != null) || (this.customerid != null && !this.customerid.equals(other.customerid))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -112,7 +115,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "com.orderApp.entity.Customer[ customerid=" + customerid + " ]";
+        return "com.ozone.Customer[ id=" + id + " ]";
     }
     
 }
