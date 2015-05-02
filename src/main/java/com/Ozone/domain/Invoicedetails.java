@@ -2,74 +2,72 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.orderApp.entity;
+package com.Ozone.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Embeddable;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  *
  * @author Lucrecia
  */
-@Table(name="INVOICEDETAILS")
-@XmlRootElement
+
 @Embeddable
 public class Invoicedetails implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-	@Basic(optional=false)
-	@NotNull
-	@Column(name="ORDERDATE")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Date orderdate;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ORDERAMOUNT")
     private double orderamount;
-
+private Invoicedetails(Builder builder){
+    id = builder.id;
+    orderdate = builder.orderdate;
+    orderamount = builder.orderamount;
+}
     public Invoicedetails() {
     }
-
-    public Invoicedetails(Date orderdate) {
-        this.orderdate = orderdate;
+public static class Builder{
+    private Long id;
+    private Date orderdate;
+    private double orderamount;
+    
+    public Builder setId(Long id){
+        this.id  = id;
+        return this;
     }
-
-    public Invoicedetails(Date orderdate, double orderamount) {
-        this.orderdate = orderdate;
-        this.orderamount = orderamount;
+    public Builder setDate(Date orderdate){
+        this.orderdate  = orderdate;
+        return this;
     }
-
-    public java.util.Date getOrderdate() {
+    public Builder setAmount(double orderamount){
+        this.orderamount  = orderamount;
+        return this;
+    }
+    public Invoicedetails build(){
+        return new Invoicedetails(this);
+    }
+    
+}
+public Long getId(){
+    return id;
+}
+ public java.util.Date getOrderdate() {
         return orderdate;
     }
 
-    public void setOrderdate(java.util.Date orderdate) {
-        this.orderdate = orderdate;
-    }
-
-    public double getOrderamount() {
+ public double getOrderamount() {
         return orderamount;
     }
 
-    public void setOrderamount(double orderamount) {
-        this.orderamount = orderamount;
-    }
-
-    @Override
+   @Override
     public int hashCode() {
         int hash = 0;
-        hash += (orderdate != null ? orderdate.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -80,7 +78,7 @@ public class Invoicedetails implements Serializable {
             return false;
         }
         Invoicedetails other = (Invoicedetails) object;
-        if ((this.orderdate == null && other.orderdate != null) || (this.orderdate != null && !this.orderdate.equals(other.orderdate))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -88,7 +86,7 @@ public class Invoicedetails implements Serializable {
 
     @Override
     public String toString() {
-        return "com.orderApp.entity.Invoicedetails[ orderdate=" + orderdate + " ]";
+        return "com.Ozone.domain.Invoicedetails[ id=" + id + " ]";
     }
     
 }

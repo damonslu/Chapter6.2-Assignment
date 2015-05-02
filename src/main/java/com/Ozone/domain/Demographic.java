@@ -2,16 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ozone.domain;
+package com.Ozone.domain;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Embeddable;
-import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
-
-
-//import javax.persistence.Entity;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**

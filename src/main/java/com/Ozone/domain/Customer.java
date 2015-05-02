@@ -7,13 +7,11 @@ package com.Ozone.domain;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.NamedQueries;
-//import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 //import javax.persistence.Table;
 //import javax.validation.constraints.NotNull;
@@ -28,6 +26,7 @@ import javax.persistence.OneToMany;
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;  
     private Customer(Builder builder){
         id = builder.id;
@@ -61,16 +60,16 @@ public class Customer implements Serializable {
         this.orderdetails = orderdetails;
     }
     @Embedded
-    private Customeraddress id;
-    public Customeraddress getId(){
-        return id;
+    private Customeraddress address;
+    public Customeraddress getAdress(){
+        return address;
     }
     public void setAddress(Customeraddress address){
         this.address = address;
     }
     @Embedded
     private Contact contact;
-    public Contact geContact(){
+    public Contact getContact(){
         return contact;
     }
     public void setContact(Contact contact){
