@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ozone.onze.app.conf;
+package com.Ozone.app;
 
 import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
@@ -24,19 +24,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author boniface
  */
 @Configuration
-@ComponentScan("com.ozone.ozone")
+@ComponentScan("com.Ozone")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.ozone.ozone.respository")
+@EnableJpaRepositories(basePackages = "com.Ozone.respository")
 public class ConnectionConfig {
 
     @Bean
     public DataSource dataSource() {
-        BasicDataSource startup = new org.apache.commons.dbcp.BasicDataSource();
-        startup.setDriverClassName("org.apache.derby.jdbc.ClientDriver");
-        startup.setUrl("jdbc:derby://localhost:1527/sample");
-        startup.setUsername("tom");
-        startup.setPassword("APP");
-        return startup;
+        BasicDataSource Ozone = new org.apache.commons.dbcp.BasicDataSource();
+        Ozone.setDriverClassName("org.apache.derby.jdbc.ClientDriver");
+        Ozone.setUrl("jdbc:derby://localhost:1527/sample");
+        Ozone.setUsername("tom");
+        Ozone.setPassword("APP");
+        return Ozone;
     }
 
     @Bean
@@ -45,7 +45,7 @@ public class ConnectionConfig {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
         lef.setDataSource(dataSource);
         lef.setJpaVendorAdapter(jpaVendorAdapter);
-        lef.setPackagesToScan("com.kabaso.askweb.domain");
+        lef.setPackagesToScan("com.Ozone.domain");
         return lef;
     }
 

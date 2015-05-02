@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.Ozone.test.repository;
+package repository;
 
-import com.Ozone.app.conf.ConnectionConfig;
+//import com.Ozone.;
+import com.Ozone.app.ConnectionConfig;
 import com.Ozone.domain.Orderdetails;
 import com.Ozone.repository.OrderdetailsRepository;
 import org.springframework.context.ApplicationContext;
