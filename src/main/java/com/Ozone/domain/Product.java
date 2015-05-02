@@ -2,60 +2,68 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.orderApp.entity;
+package com.Ozone.domain;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Lucrecia
  */
-@Table(name="PRODUCT")
-@XmlRootElement
+
 @Embeddable
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
-    //@Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PRODUCTDescription")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String productDesc;
-        private Collection<Orderitem> products;
+    
+    private Product (Builder builder){
+        id = builder.id;
+        productDesc = builder.productDesc;
+    }
+    public Product(){
+        
+    }
+    public static class Builder{
+        private Long id;
+        private String productDesc;
+        
+        public Builder setId(Long id){
+            this.id = id;
+            return this;
+        }
+        public Builder setDesc(String productDesc){
+            this.productDesc = productDesc;
+            return this;
+        }
+        public Product build(){
+            return new Product(this);
+        }
+    
+    }
+        /* private Collection<Orderitem> products;
+}
         public Product() {
         products = new HashSet();
-    }
+    }*/
 
-    public Product(String productDesc) {
-        this.productDesc = productDesc;
-    }
-
-    public String getProductDesc() {
+public Long getId(){
+    return id;
+}
+public String getProductDesc() {
         return productDesc;
     }
-
-    public void setProductDesc(String productDesc) {
-        this.productDesc = productDesc;
-    }
-    
-    
+       
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (productDesc != null ? productDesc.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -66,7 +74,7 @@ public class Product implements Serializable {
             return false;
         }
         Product other = (Product) object;
-        if ((this.productDesc == null && other.productDesc != null) || (this.productDesc != null && !this.productDesc.equals(other.productDesc))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -74,7 +82,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.orderApp.entity.Product[ productid=" + productDesc + " ]";
+        return "com.Ozone.Product[ id=" + id + " ]";
     }
 
 	

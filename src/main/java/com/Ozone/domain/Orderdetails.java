@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ozone.domain;
+package com.Ozone.domain;
 
-import com.Ozone.domain.Invoice;
+//import com.Ozone.domain.Invoice;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
