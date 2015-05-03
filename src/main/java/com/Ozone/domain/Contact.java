@@ -58,6 +58,12 @@ public class Contact implements Serializable {
         this.email = email;
         return this;
     }
+    public Builder copy(Contact value){
+        this.id = value.id;
+        this.phonenumber= value.phonenumber;
+        this.email = value.email;
+        return this;
+    }
      public Contact build(){
         return new Contact(this);
     }

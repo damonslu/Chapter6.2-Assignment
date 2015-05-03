@@ -57,6 +57,13 @@ public class Customeraddress implements Serializable {
         this.region = value;
         return this;
        }
+       public Builder copy(Customeraddress value){
+           this.id = value.id;
+           this.streetaddress = value.streetaddress;
+           this.city = value.city;
+           this.region = value.region;
+           return this;
+       }
        public Customeraddress build(){
            return new Customeraddress(this);
        }

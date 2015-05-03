@@ -48,6 +48,12 @@ public static class Builder{
         this.orderamount  = orderamount;
         return this;
     }
+    public Builder copy(Invoicedetails value){
+        this.id = value.id;
+        this.orderdate = value.orderdate;
+        this.orderamount = value.orderamount;
+        return this;
+    }
     public Invoicedetails build(){
         return new Invoicedetails(this);
     }

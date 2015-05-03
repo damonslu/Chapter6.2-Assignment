@@ -48,9 +48,15 @@ public class Name implements Serializable{
     public Builder setLastname(String lastname){
         this.lastname = lastname;
         return this;
-    
     }
-    public Name build(){
+    public Builder setName(Name value){
+        this.id = value.getId();
+        this.firstname = value.getFirstname();
+        this.firstname= value.getLastname();
+        return this;
+        
+    }
+        public Name build(){
         return new Name(this);
     }
     }

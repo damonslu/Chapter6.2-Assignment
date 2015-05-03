@@ -7,12 +7,15 @@ package com.Ozone.domain;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 //import javax.persistence.Table;
 //import javax.validation.constraints.NotNull;
 //import javax.xml.bind.annotation.XmlRootElement;*/
@@ -28,21 +31,53 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;  
-    private Customer(Builder builder){
-        id = builder.id;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    private Collection<Name> name;
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<Orderdetails> orderdetails;
-
-    public Customer() {
-        orderdetails = new HashSet();
+    private Customer(){
+        
     }
+    public Customer(Builder builder){
+        id = builder.id;
+        orderdetails = builder.orderdetails;
+        name = builder.name;
+    }
+    
+
+   /* public Customer() {
+        orderdetails = new HashSet();
+    }*/
     public static class Builder{
         
         private Long id;
+        private Collection<Orderdetails> orderdetails;
+        private Collection<Name> name;
         public Builder setId(Long id){
             this.id = id;
             return this;
         }
+        public Builder setName(Collection<Name> name ){
+            this.name = name;
+            return this;
+        }
+        public Builder setOrderdetails(Collection<Orderdetails> orderdetails){
+            this.orderdetails = orderdetails;
+            return this;
+        }
+        public Builder name(Collection<Name> value){
+        this.name = value;
+        return this;
+}
+        public Builder getName(Customer value){
+            
+            this.name= value.getName();
+                              
+            this.id = value.getId();
+            this.orderdetails = value.getOrderdetails();
+            return this;
+                    
+        }     
         public Customer build(){
             return new Customer(this);
         }
@@ -52,12 +87,9 @@ public class Customer implements Serializable {
         return id;
     }
 
-        @OneToMany(mappedBy = "customer")
+        
     public Collection<Orderdetails> getOrderdetails(){
         return orderdetails;
-    }
-    public void setOrderdetails(Collection<Orderdetails> orderdetails){
-        this.orderdetails = orderdetails;
     }
     @Embedded
     private Customeraddress address;
@@ -77,21 +109,25 @@ public class Customer implements Serializable {
     }
     @Embedded
     private Demographic dmo;
-    public Demographic geDemo(){
+    public Demographic getDemo(){
         return dmo;
     }
     public void setDemo(Demographic dmo){
         this.dmo = dmo;
     }
     @Embedded
-    private Name name;
-    public Name getName(){
+    private  Collection<Name> name;
+    public Collection<Name> getName(){
         return name;
     }
-    public void setName(Name name){
-        this.name = name;
+    /*public name.getLastname(){
+        return lastname;
+    }*/
+    public Collection<Name> setName(Customer value){
+        this.name = (Collection<Name>) value;
+        return (Collection<Name>) this;
     }
-    
+      
     @Override
     public int hashCode() {
         int hash = 0;

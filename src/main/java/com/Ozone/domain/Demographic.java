@@ -57,6 +57,13 @@ public class Demographic implements Serializable {
         this.dob = value;
         return this;
        }
+       public Builder copy(Demographic value){
+           this.id = value.id;
+           this.gender = value.gender;
+           this.race = value.race;
+           this.dob= value.dob;
+           return this;
+       }
        public Demographic build(){
            return new Demographic(this);
        }

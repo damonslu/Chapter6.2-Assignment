@@ -10,12 +10,15 @@ import java.util.Collection;
 import java.util.HashSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import java.util.List;
 
 /**
  *
@@ -28,19 +31,70 @@ public class Orderdetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
+    @Embedded
+    private List<Orderitem> orderitems;
+    @OneToMany
+    @JoinColumn(name = "id")
+    private List<Productdetails> productdetails;
+    @ManyToOne
+    private List<Customer> customers;
+    @OneToOne(cascade=CascadeType.PERSIST)
+    private Invoice invoice;
+    
     private Orderdetails(Builder builder){
-        id = builder.id;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.customers = builder.customers;
+        this.orderitems = builder.orderitems;
+        this.productdetails = builder.productdetails;
     }
-    public Orderdetails() {
+    private Orderdetails() {
         
-        orderitems = new HashSet();
+        //orderitems = new HashSet();
         //invoice = new HashSet();
     }
     public static class Builder{
         private Long id;
+        private String name;
+        private List<Customer> customers;
+        private List<Orderitem> orderitems;
+        private List<Productdetails> productdetails;
+        private Invoice invoice;
         
-        public Builder setId(Long id){
-            this.id = id;
+        public Builder id(Long value){
+            this.id = value;
+            return this;
+        }
+        public Builder(String name){
+            this.name = name;
+        }
+        public Builder orderitems(List<Orderitem> value){
+            this.orderitems = value;
+            return this;
+            
+        }
+        public Builder customers(List<Customer> value){
+            this.customers = value;
+            return this;
+        }
+        public Builder productdetails(List<Productdetails> value){
+            this.productdetails = value;
+            return this;
+            
+        }
+        public Builder invoice(Invoice value){
+            this.invoice = value;
+            return this;
+            
+        }
+        public Builder copy(Orderdetails value){
+            this.id = value.id;
+            this.customers = value.customers;
+            this.name= value.name;
+            this.orderitems = value.orderitems;
+            this.productdetails = value.productdetails;
+            this.invoice = value.invoice;
             return this;
         }
         public Orderdetails build(){
@@ -50,36 +104,27 @@ public class Orderdetails implements Serializable {
     public Long getId(){
         return id;
     }
-    //private Integer orderid;
-    private Collection<Orderitem> orderitems;
-    //private Collection<Invoice> invoice; 
-    @ManyToOne
-    private Customer customer;
-        public Customer getCustomer(){
-        
-        return customer;
+    public String getName(){
+        return name;
     }
-        
-        @OneToOne(cascade=CascadeType.PERSIST)
-    private Invoice inv;
-        public Invoice getInvoice(){
-        
-        return inv;
-    }
-        public void setInvoice(Invoice inv){
-            this.inv = inv;
-        }
-    
-        @OneToMany(mappedBy = "orderdetails")
-    public Collection<Orderitem> getOrderitem(){
+    public List<Orderitem >getOrderitems(){
         
         return orderitems;
     }
-    public void setOrderItem(Collection<Orderitem> orderitems ){
+    public List<Customer >getCustomer(){
         
-        this.orderitems = orderitems;
+        return customers;
     }
-    
+    public List<Productdetails> getProductdetails(){
+        
+        return productdetails;
+    }
+    public Invoice getInvoice(){
+        
+        return invoice;
+    }
+        
+       
     @Override
     public int hashCode() {
         int hash = 0;

@@ -30,19 +30,39 @@ public class Productdetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private double price;
+    private Integer quantity;
        //private String productID;
        
        private Productdetails(Builder builder){
            id = builder.id;
+           price = builder.price;
+           quantity = builder.quantity;
         }
        public Productdetails(){
            
        }
        public static class Builder{
-           private Long id;
+           private Long id;;
+           private double price;
+           private Integer quantity;
            
            public Builder setId(Long id){
                this.id = id;
+               return this;
+           }
+           public Builder setPrice(double price){
+               this.price = price;
+               return this;
+           }
+           public Builder setQuantity(Integer quantity){
+               this.quantity = quantity;
+               return this;
+           }
+           public Builder copy(Productdetails value){
+               this.id = value.id;
+               this.price = value.price;
+               this.quantity  = value.quantity;
                return this;
            }
            public Productdetails build(){

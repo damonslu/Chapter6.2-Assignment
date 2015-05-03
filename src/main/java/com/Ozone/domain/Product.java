@@ -42,6 +42,11 @@ public class Product implements Serializable {
             this.productDesc = productDesc;
             return this;
         }
+        public Builder copy(Product value){
+            this.id = value.id;
+            this.productDesc = value.productDesc;
+            return this;
+        }
         public Product build(){
             return new Product(this);
         }
