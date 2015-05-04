@@ -1,156 +1,111 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.Ozone.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-//import javax.persistence.Table;
-//import javax.validation.constraints.NotNull;
-//import javax.xml.bind.annotation.XmlRootElement;*/
+import java.util.List;
 
 /**
- *
- * @author Lucrecia
+ * 
  */
-
 @Entity
-public class Customer implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Customer  implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;  
-    @OneToOne(cascade = CascadeType.ALL)
-    private Collection<Name> name;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Orderdetails> orderdetails;
-    private Customer(){
-        
-    }
-    public Customer(Builder builder){
-        id = builder.id;
-        orderdetails = builder.orderdetails;
-        name = builder.name;
-    }
-    
+    private Long id;
+    //private String name;
+    @Embedded
+    private Name name;
+    @Embedded
+    private Contact contact;
+    @Embedded
+    private Customeraddress address;
+    @Embedded
+    private Demographic demo;
+    @OneToMany
+    @JoinColumn(name = "cust_id")
+    private List<Orderdetails> orderdetails;
 
-   /* public Customer() {
-        orderdetails = new HashSet();
-    }*/
-    public static class Builder{
-        
-        private Long id;
-        private Collection<Orderdetails> orderdetails;
-        private Collection<Name> name;
-        public Builder setId(Long id){
-            this.id = id;
-            return this;
-        }
-        public Builder setName(Collection<Name> name ){
-            this.name = name;
-            return this;
-        }
-        public Builder setOrderdetails(Collection<Orderdetails> orderdetails){
-            this.orderdetails = orderdetails;
-            return this;
-        }
-        public Builder name(Collection<Name> value){
-        this.name = value;
-        return this;
-}
-        public Builder getName(Customer value){
-            
-            this.name= value.getName();
-                              
-            this.id = value.getId();
-            this.orderdetails = value.getOrderdetails();
-            return this;
-                    
-        }     
-        public Customer build(){
-            return new Customer(this);
-        }
+    public Customer() {
     }
 
         public Long getId() {
         return id;
     }
 
-        
-    public Collection<Orderdetails> getOrderdetails(){
-        return orderdetails;
+        public Name getName(){
+        return name;
     }
-    @Embedded
-    private Customeraddress address;
-    public Customeraddress getAdress(){
+
+    public Customeraddress getAddress() {
         return address;
     }
-    public void setAddress(Customeraddress address){
-        this.address = address;
-    }
-    @Embedded
-    private Contact contact;
     public Contact getContact(){
         return contact;
     }
-    public void setContact(Contact contact){
-        this.contact = contact;
-    }
-    @Embedded
-    private Demographic dmo;
-    public Demographic getDemo(){
-        return dmo;
-    }
-    public void setDemo(Demographic dmo){
-        this.dmo = dmo;
-    }
-    @Embedded
-    private  Collection<Name> name;
-    public Collection<Name> getName(){
-        return name;
-    }
-    /*public name.getLastname(){
-        return lastname;
-    }*/
-    public Collection<Name> setName(Customer value){
-        this.name = (Collection<Name>) value;
-        return (Collection<Name>) this;
-    }
-      
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public Demographic getDemographic(){
+        return demo;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer)) {
-            return false;
-        }
-        Customer other = (Customer) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public List<Orderdetails> getOrderdetails() {
+        return orderdetails;
     }
 
-    @Override
-    public String toString() {
-        return "com.ozone.Customer[ id=" + id + " ]";
+    public Customer(Builder builder) {
+        this.address=builder.address;
+        this.id=builder.id;
+        this.name = builder.name;
+        this.contact = builder.contact;
+        this.demo = builder.demo;
+        this.orderdetails=builder.orderdetails;
+        //this.name=builder.name;
     }
-    
+
+    public static class Builder{
+        private Long id;
+        //private String name;
+        private Name name;
+        private Customeraddress address;
+        private Contact contact;
+        private Demographic demo;
+        private List<Orderdetails> orderdetails;
+
+        public Builder id(Long value){
+            this.id=value;
+            return this;
+        }
+        public Builder name(Name value){
+            this.name=value;
+            return this;
+        }
+        public Builder address(Customeraddress value){
+            this.address=value;
+            return this;
+        }
+        public Builder contact(Contact value){
+            this.contact=value;
+            return this;
+        }
+        public Builder demo(Demographic value){
+            this.demo=value;
+            return this;
+        }
+        public Builder orderdetails(List<Orderdetails> value){
+            this.orderdetails = value;
+            return this;
+        }
+        
+        public Builder copy(Customer value){
+            this.orderdetails=value.orderdetails;
+            this.address=value.address;
+            this.contact = value.contact;
+            this.demo = value.demo;
+            this.id=value.id;
+            this.name=value.name;
+            return this;
+        }
+
+        public Customer build(){
+            return new Customer(this);
+        }
+
+    }
 }

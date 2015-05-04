@@ -4,105 +4,52 @@
  */
 package com.Ozone.domain;
 
-//import com.Ozone.domain.Customer;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-//import javax.persistence.Table;
-//import javax.validation.constraints.NotNull;
-//mport javax.validation.constraints.Size;
-//import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Lucrecia
+ * @author boniface
  */
-//@Table(name="CONTACT")
-//@XmlRootElement
 @Embeddable
-public class Contact implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String phonenumber;
-        private String email;
-
-    private Contact(Builder builder) {
-       id = builder.id;
-        phonenumber = builder.phonenumber;
-        email = builder.email;
-    }
-    public Contact(){
-    }
-
-    public static class Builder{
-    private Long id;
-        private String phonenumber;
+public class Contact implements Serializable{
+    private String phone;
+    private String cell;
     private String email;
-    
-    public Builder setId(Long id){
-        this.id = id;
-        return this;
-               
-    }
-    public  Builder setPhoneNumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-        return this;
+    private String fax;
+
+    public String getPhone() {
+        return phone;
     }
 
-    public Builder setEmail(String email) {
-        //this.phonenumber = phonenumber;
-        this.email = email;
-        return this;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-    public Builder copy(Contact value){
-        this.id = value.id;
-        this.phonenumber= value.phonenumber;
-        this.email = value.email;
-        return this;
+
+    public String getCell() {
+        return cell;
     }
-     public Contact build(){
-        return new Contact(this);
+
+    public void setCell(String cell) {
+        this.cell = cell;
     }
-    }
-    public Long getId(){
-        
-        return id;
-    }
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-    
+
     public String getEmail() {
         return email;
     }
 
-        @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contact)) {
-            return false;
-        }
-        Contact other = (Contact) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public String getFax() {
+        return fax;
     }
 
-    @Override
-    public String toString() {
-        return "com.Ozone.Contact[ id=" + id + " ]";
+    public void setFax(String fax) {
+        this.fax = fax;
     }
     
-    }
+    
+    
+}

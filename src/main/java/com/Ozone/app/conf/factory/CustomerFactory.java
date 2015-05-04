@@ -4,28 +4,29 @@
  */
 package com.Ozone.app.conf.factory;
 
-import com.Ozone.domain.Customer;
-//import com.Ozone.domain.Invoice;
-import com.Ozone.domain.Customeraddress;
-import com.Ozone.domain.Name;
-import com.Ozone.domain.Contact;
-import com.Ozone.domain.Demographic;
-import java.util.*;
+import com.Ozone.domain.*;;
 
-//import com.Ozone.domain.Name;
-
-
+import java.util.Map;
 
 /**
  *
- * @author Lucrecia
+ * @author boniface
  */
 public class CustomerFactory {
-    public static Customer createCustomer(Map<String, String> values){
-      
+    
+    public static Customer getDepartment(Name name, Customeraddress address, Contact contact, Demographic demo, Map<String,String> values){
+        
         Customer customer = new Customer();
-        customer.setName(values.get("firstname", "lastname"));
-        customer.setDemo(values.get);
+        customer.setName(name);
+        customer.setContact(contact);
+         customer.setContact(contact);
+        customer.setAddress(address);
+        
+        department.setColour(values.get("color"));
+        department.setName("name");
+        department.setTheme("theme");
+        
+        return department;
     }
     
 }
