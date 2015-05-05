@@ -6,7 +6,7 @@ package com.Ozone.app.conf.factory;
 
 import com.Ozone.domain.*;;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -14,19 +14,28 @@ import java.util.Map;
  */
 public class CustomerFactory {
     
-    public static Customer getDepartment(Name name, Customeraddress address, Contact contact, Demographic demo, Map<String,String> values){
+    public static Customer createCustomer(Long value, Name name, Customeraddress address, Contact contact, Demographic demo,List<Orderdetails> orderdetails){
         
-        Customer customer = new Customer();
-        customer.setName(name);
-        customer.setContact(contact);
-         customer.setContact(contact);
-        customer.setAddress(address);
+        Customer customer = new Customer
+        //.Builder.id(value)
+                //.id(value.get(id))
+              .Builder(name)
+                .address(address)
+                .contact(contact)
+                .demo(demo)
+                .orderdetails(orderdetails)
+                .build();
+        return customer;
+        /*customer.name(name);
+        customer.address(address);
+         customer.contact(contact);
+        customer.demo(demo);*/
+       
+        //customer.setColour(values.get("color"));
+        //department.setName("name");
+        //department.setTheme("theme");
         
-        department.setColour(values.get("color"));
-        department.setName("name");
-        department.setTheme("theme");
-        
-        return department;
+        //return customer;
     }
     
 }

@@ -68,6 +68,10 @@ public class Customer  implements Serializable{
         private Demographic demo;
         private List<Orderdetails> orderdetails;
 
+        public Builder(Name name) {
+            throw new UnsupportedOperationException("Not yet implemented");
+        }
+
         public Builder id(Long value){
             this.id=value;
             return this;

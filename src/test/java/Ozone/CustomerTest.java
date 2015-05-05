@@ -28,6 +28,12 @@ public class CustomerTest {
     @BeforeClass
     public static void setUpClass() throws Exception {
     }
+    /*@Test
+    public void testCreateCustomer() throws Exception{
+        values.put(firstname, "Lucrecia");
+        values.put(lastname, "Damons");
+        values.put.(contact, 
+    }*/
 
     @AfterClass
     public static void tearDownClass() throws Exception {

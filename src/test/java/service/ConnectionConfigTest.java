@@ -1,3 +1,5 @@
+package service;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -38,7 +40,7 @@ public class ConnectionConfigTest {
         BasicDataSource Ozone = new org.apache.commons.dbcp.BasicDataSource();
         Ozone.setDriverClassName("org.apache.derby.jdbc.ClientDriver");
         Ozone.setUrl("jdbc:derby://localhost:1527/sample");
-        Ozone.setUsername("tom");
+        Ozone.setUsername("app");
         Ozone.setPassword("APP");
         return Ozone;
     }
