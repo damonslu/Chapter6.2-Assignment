@@ -46,6 +46,10 @@ public class Productdetails implements Serializable {
            private Long id;;
            private double price;
            private Integer quantity;
+
+        public Builder(Long id) {
+            throw new UnsupportedOperationException("Not yet implemented");
+        }
            
            public Builder setId(Long id){
                this.id = id;

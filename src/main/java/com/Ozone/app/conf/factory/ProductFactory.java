@@ -4,20 +4,45 @@
  */
 package com.Ozone.app.conf.factory;
 
-import com.Ozone.domain.Product;
-import com.Ozone.domain.Productdetails;
-import java.util.*;
+import com.Ozone.domain.*;;
 
+import java.util.*;
+import javax.websocket.ClientEndpointConfig;
+import java.util.*;
 
 /**
  *
- * @author Lucrecia
+ * @author boniface
  */
 public class ProductFactory {
-    public static Product createProduct(Productdetails productdetails, Map<String, String> values){
-        Product product = new Product();
-        return product;
-                
+    
+    /**
+     *
+     * @param id
+     * @param price
+     * @param quantity
+     * @return
+     */
+    public static Productdetails createProduct(Long id, double price,Integer quantity){
+        
+        Productdetails productdetails = new Productdetails
+        //.Builder.id(value)
+                //.id(value.get(id))
+             .Builder(id)
+              .setPrice(price)
+                .setQuantity(quantity)
+                .build();
+        return productdetails;
+        /*customer.name(name);
+        customer.address(address);
+         customer.contact(contact);
+        customer.demo(demo);*/
+       
+        //customer.setColour(values.get("color"));
+        //department.setName("name");
+        //department.setTheme("theme");
+        
+        //return customer;
     }
     
 }

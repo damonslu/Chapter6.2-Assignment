@@ -33,6 +33,10 @@ public class Product implements Serializable {
     public static class Builder{
         private Long id;
         private String productDesc;
+
+        public Builder(Long value) {
+            throw new UnsupportedOperationException("Not yet implemented");
+        }
         
         public Builder setId(Long id){
             this.id = id;
