@@ -24,7 +24,8 @@ public class Customer  implements Serializable{
     @JoinColumn(name = "cust_id")
     private List<Orderdetails> orderdetails;
 
-    public Customer() {
+    public Customer(Long value, Name name, Customeraddress address, Contact contact, Demographic demo,List<Orderdetails> orderdetails) {
+ 
     }
 
         public Long getId() {
