@@ -5,6 +5,7 @@
 package Ozone;
 
 import com.Ozone.app.conf.factory.ProductFactory;
+import com.Ozone.domain.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,46 +16,32 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  *
  * @author admin
  */
+
 public class ProductTest {
-    
-    public ProductTest() {
-    }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-
-
-
-
-/**
- * Created by hashcode on 2015/04/13.
- */
-public class CourseTest {
-    @Before
+    @BeforeClass
     public void setUp() throws Exception {
 
 
     }
 
     @Test
-    public void testCreateCourse() throws Exception {
-        List<Subject> lecturers = new ArrayList<Subject>();
+    public void testCreateProduct() throws Exception {
+        List<Productdetails> productdetails = new ArrayList<Productdetails>();
         Map<String,String> values = new HashMap<String,String>();
 
-        values.put("code","NDP2015");
-        values.put("name", "National Diploma");
+        values.put("price","R500");
+        values.put("quantity", "5");
 
-        Course course =CourseFactory
-                .createCourse(25, values, lecturers);
+        Product product =ProductFactory
+                .createProduct(25, values, productdetails);
 
-        Assert.assertEquals("NDP2015",course.getCode());
+        Assert.assertEquals("R500",product.getCode());
     }
 
     @Test
