@@ -6,10 +6,11 @@ package Ozone;
 
 import com.Ozone.app.conf.factory.ProductFactory;
 import com.Ozone.domain.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.testng.Assert;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -32,19 +33,26 @@ public class ProductTest {
 
     @Test
     public void testCreateProduct() throws Exception {
-        List<Productdetails> productdetails = new ArrayList<Productdetails>();
-        Map<String,String> values = new HashMap<String,String>();
-
+        //List<Productdetails> productdetails = new ArrayList<Productdetails>();
+        //Long id = 1000000;
+        double price = 500;
+        Integer quantity= 5;
+        String description = "Victorian";
+        Map<String, String> values = new HashMap<String, String>();
+        //values(id);
+        //values.put("id",3);
+        
         values.put("price","R500");
         values.put("quantity", "5");
 
-        Product product =ProductFactory
-                .createProduct(25, values, productdetails);
-
-        Assert.assertEquals("R500",product.getCode());
+        Productdetails productdetails =ProductFactory
+                .createProduct(price,quantity, description);
+                //.values.put(id);
+                //productdetails.setDetails();
+        //Assert.assertEquals(productdetails.getDetails());
     }
 
-    @Test
+    /*@Test
     public void testUpadteCourse() throws Exception {
         List<Subject> lecturers = new ArrayList<Subject>();
         Map<String,String> values = new HashMap<String,String>();
@@ -52,11 +60,11 @@ public class ProductTest {
         values.put("code","NDP2015");
         values.put("name", "National Diploma");
 
-        Course course =CourseFactory
+        Product Product =ProductFactory
                 .createCourse(25, values, lecturers);
 
-        Course newcourse = new Course
-                .Builder(course.getCode())
+        Product newcourse = new Product
+                .Builder(product.getCode())
                 .copy(course)
                 .offering(20).build();
 
@@ -66,14 +74,10 @@ public class ProductTest {
         Assert.assertEquals(25,course.getOffering());
 
 
-    }
-}
+    }*/
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
 
-    @AfterClass
+       @AfterClass
     public static void tearDownClass() throws Exception {
     }
 

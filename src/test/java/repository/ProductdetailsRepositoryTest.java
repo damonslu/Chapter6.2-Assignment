@@ -6,10 +6,10 @@
 
 package repository;
 
-import com.Ozone.domain.Product;
+import com.Ozone.domain.Productdetails;
 //import static com.startup.musicstore.domain.PersonRepositoryTest.ctx;
 import com.Ozone.repository.*;
-//import ConnectionConfigTest;
+import com.Ozone.app.ConnectionConfig; //ConnectionConfigTest;
 //import static com.startup.musicstore.test.repository.CreditCardRepositoryTest.ctx;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -25,12 +25,12 @@ import org.testng.annotations.Test;
  *
  * @author 201131153
  */
-public class ProductRepositoryTest {
+public class ProductdetailsRepositoryTest {
 
     public static ApplicationContext ctx;
      private Long id;
-     private ProductRepository repo;
-    public ProductRepositoryTest() {
+     private ProductdetailsRepository repo;
+    public ProductdetailsRepositoryTest() {
     }
 
     // TODO add test methods here.
@@ -38,9 +38,10 @@ public class ProductRepositoryTest {
     //
      @Test(enabled = true)
      public void createProduct(){
+        
          
-         repo = ctx.getBean(ProductRepository.class);
-         Product p = repo.findOne(id);
+         repo = ctx.getBean(ProductdetailsRepository.class);
+         Productdetails p = repo.findOne(id);
                  
                  
          repo.save(p);
@@ -48,31 +49,31 @@ public class ProductRepositoryTest {
          Assert.assertNotNull(p);
          
      }
-     @Test(dependsOnMethods = "createCustomer", enabled = true)
+     @Test(dependsOnMethods = "createProduct", enabled = true)
      public void readPerson(){
-         repo = ctx.getBean(ProductRepository.class);
-         Product p = repo.findOne(id);
-         Assert.assertEquals(p.getProductDescription(), "Furniture");
+         repo = ctx.getBean(ProductdetailsRepository.class);
+         Productdetails p = repo.findOne(id);
+         Assert.assertEquals(p.getPrice(), "R500");
          
      }
      @Test(dependsOnMethods = "readProduct", enabled = true)
     private void updateProduct() {
-        repo = ctx.getBean(ProductRepository.class);
+        repo = ctx.getBean(ProductdetailsRepository.class);
         //GET THE OBJECT 
-        Product prod = repo.findOne(id);
+        Productdetails prod = repo.findOne(id);
         
         
-        Assert.assertEquals(prod.getProductName(), "Victorian Couch");
+        Assert.assertEquals(prod.getDescription(), "Victorian Couch");
 
     }
     // public void hello() {}
     @Test(dependsOnMethods = "updateProduct",enabled = true)
      private void deleteProduct(){
-         repo = ctx.getBean(ProductRepository.class);
-         Product p = repo.findOne(id);
+         repo = ctx.getBean(ProductdetailsRepository.class);
+         Productdetails p = repo.findOne(id);
          repo.delete(p);
          
-         Product deletedProduct = repo.findOne(id);
+         Productdetails deletedProduct = repo.findOne(id);
          
          Assert.assertNull(deletedProduct);
          
@@ -81,7 +82,7 @@ public class ProductRepositoryTest {
     @BeforeClass
     public static void setUpClass() throws Exception {
         
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
     }
 
     @AfterClass

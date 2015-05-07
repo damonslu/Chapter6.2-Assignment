@@ -23,14 +23,14 @@ public class ProductFactory {
      * @param quantity
      * @return
      */
-    public static Productdetails createProduct(Long id, double price,Integer quantity){
+    public static Productdetails createProduct(double price,Integer quantity, String description){
         
         Productdetails productdetails = new Productdetails
         //.Builder.id(value)
                 //.id(value.get(id))
-             .Builder(id)
-              .setPrice(price)
+             .Builder(price)
                 .setQuantity(quantity)
+                .setDescription(description)
                 .build();
         return productdetails;
         /*customer.name(name);

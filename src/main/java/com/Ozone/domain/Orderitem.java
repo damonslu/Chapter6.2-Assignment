@@ -60,9 +60,9 @@ public class Orderitem implements Serializable {
         return orderdetails;
     }
     @ManyToOne
-    private Product product;
-    public Product getProduct(){
-        return product;
+    private Productdetails productdetails;
+    public Productdetails getProduct(){
+        return productdetails;
     }
 
      public Long getId(){

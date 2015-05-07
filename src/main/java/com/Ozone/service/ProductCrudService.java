@@ -4,13 +4,13 @@
  */
 package com.Ozone.service;
 
-import com.Ozone.domain.Product;
+import com.Ozone.domain.Productdetails;
 /**
  *
  * @author Lucrecia
  */
-public interface ProductCrudService extends Service<Product, Long> {
-    public Product getProductByName(String name);
+public interface ProductCrudService extends Service<Productdetails, Long> {
+    public Productdetails getProductByName(String name);
     public int getNumberOfProducts();
     
     

@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -32,27 +32,38 @@ public class Productdetails implements Serializable {
     private Long id;
     private double price;
     private Integer quantity;
+    private String description;
        //private String productID;
        
        private Productdetails(Builder builder){
-           id = builder.id;
+           //id = builder.id;
            price = builder.price;
            quantity = builder.quantity;
+           description = builder.description;
         }
        public Productdetails(){
            
        }
+
+    public void setDetails() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
        public static class Builder{
-           private Long id;;
+           //private Long id;;
            private double price;
            private Integer quantity;
+           private String description;
 
         public Builder(Long id) {
             throw new UnsupportedOperationException("Not yet implemented");
         }
+
+        public Builder(double price) {
+            throw new UnsupportedOperationException("Not yet implemented");
+        }
            
-           public Builder setId(Long id){
-               this.id = id;
+           public Builder setDescription(String description){
+               this.description = description;
                return this;
            }
            public Builder setPrice(double price){
@@ -64,19 +75,21 @@ public class Productdetails implements Serializable {
                return this;
            }
            public Builder copy(Productdetails value){
-               this.id = value.id;
+               //this.description = value.description;
                this.price = value.price;
                this.quantity  = value.quantity;
+               this.description = value.description;
                return this;
            }
            public Productdetails build(){
                return new Productdetails(this);
            }
        }
+    @Id
        public Long getId(){
            return id;
        }
-    private Collection<Orderitem> products;
+    private Collection<Orderitem> productdetails;
     //private String productname;
     //@Basic(optional = false)
     //@NotNull
@@ -88,37 +101,33 @@ public class Productdetails implements Serializable {
     /*public Productdetails(String productname, double productprice) {
         this.productname = productname;
         this.productprice = productprice;
-    }
-
-    public String getProductname() {
-        return productname;
-    }
-
-    public void setProductname(String productname) {
-        this.productname = productname;
-    }
-
-    public double getProductprice() {
-        return productprice;
-    }
-
-    public void setProductprice(double productprice) {
-        this.productprice = productprice;
     }*/
+
+    public double getPrice() {
+        return price;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    
     @OneToMany(mappedBy = "productDetails")
         public Collection<Orderitem> getProducts(){
-        return products;
+        return productdetails;
     }
-    public void setProducts(Collection<Orderitem> products){
+    public void setProducts(Collection<Orderitem> productdetails){
         
-        this.products = products;
+        this.productdetails = productdetails;
     }
 @Embedded
-    private Product pd;
-    public Product getDetails(){
+    private Productdetails pd;
+    public Productdetails getDetails(){
         return pd;
     }
-    public void setDetails(Product pd){
+    public void setDetails(Productdetails pd){
         this.pd = pd;
     }
     @Override
